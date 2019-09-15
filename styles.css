@@ -1,0 +1,46 @@
+div.header{
+    text-align: center;
+    font-family: Garamond, serif;
+    font-size: 18px;
+    color: black;
+    line-height: 170%;
+
+}
+body{
+    background: linear-gradient(to right, #000000, #434343);
+}
+.block{
+    border: 2px solid black;
+    border-radius: 8px;
+    width: 700px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 5px;
+
+}
+#info-text{
+    width: 600px;
+}
+#info-pic{
+
+    width: 300px;
+
+}
+.input{
+    text-align: center;
+    line-height: 150%;
+}
+.footer{
+    text-align: center;
+}
+#result{
+    margin: 0 auto;
+    width: 700px;
+}
+#submit:hover{
+    background: #0a90bf;
+}
+div img{
+    display: block;
+    margin: 5px auto;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторная работа по Web-программированию №1</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script type="text/javascript">
+        function validate(form) {
+
+            var y = form.y.value;
+            y = y.replace(/,/, ".");
+            if (y =="" || isNaN(y)) {alert("Y должен быть числом"); return false}
+            else if (y<-3 || y>5){
+                alert("Y должен находиться от -3 до 5"); return false
+            }
+            else {
+                document.getElementById("div-result").style.display = "block";
+                return true;}
+        }
+        function check(input) {
+            input.value = input.value.replace(/[^\d-,.]/, '');
+        }
+    </script>
+</head>
+<body>
+
+<div class="header block">
+    <span class="header"> Демичев Даниил Дмитриевич<br> Группа P3213 <br> Вариант: 213003</span>
+</div>
+<div class="block info"> 
+    <img src="img/text.PNG" id="info-text">
+    <img src="img/pic.PNG" id="info-pic">
+</div>
+<div class="block input">
+    <form action="work.php" method="get" target="result"  onsubmit="return validate(this)">
+    Выберите X:
+        <input type="radio" checked="checked" name="x" value="-5">-5
+    <input type="radio" name="x" value="-4">-4
+    <input type="radio" name="x" value="-3">-3
+    <input type="radio" name="x" value="-2">-2
+    <input type="radio" name="x" value="-1">-1
+    <input type="radio" name="x" value="0">0
+    <input type="radio" name="x" value="1">1
+    <input type="radio" name="x" value="2">2
+    <input type="radio" name="x" value="3">3
+    <br>
+    Введите Y:
+    <input type="text"  placeholder="-3..5" name="y" onkeyup="check(this)" onchange="check(this)">
+    <br>
+    Выберите R:
+    <select name="r">
+        <option value="1">1</option>
+        <option value="1.5">1.5</option>
+        <option value="2">2</option>
+        <option value="2.5">2.5</option>
+        <option value="3">3</option>
+
+    </select>
+        <br>
+        <input type="submit" id="submit">
+    </form>
+</div>
+<div align="center" class="block" id="div-result" style="display: none">
+    <iframe id="result" name="result" scrolling="no" frameborder="no" ></iframe>
+</div>
+<div class="footer block">
+    2019 г.
+</div>
+</body>
+</html>
