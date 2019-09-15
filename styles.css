@@ -8,6 +8,7 @@ div.header{
 }
 body{
     background: linear-gradient(to right, #000000, #434343);
+    font-family: "Georgia", serif;
 }
 .block{
     border: 2px solid black;
@@ -28,7 +29,7 @@ body{
 }
 .input{
     text-align: center;
-    line-height: 150%;
+    line-height: 170%;
 }
 .footer{
     text-align: center;
@@ -43,4 +44,8 @@ body{
 div img{
     display: block;
     margin: 5px auto;
+}
+#error{
+    font-weight: bold;
+    font-size: 20px;
 }
