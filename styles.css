@@ -37,6 +37,7 @@ body{
 #result{
     margin: 0 auto;
     width: 700px;
+
 }
 #submit:hover{
     background: #0a90bf;
@@ -48,4 +49,7 @@ div img{
 #error{
     font-weight: bold;
     font-size: 20px;
+}
+input{
+    margin: 2%;
 }

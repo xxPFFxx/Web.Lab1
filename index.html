@@ -1,29 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="UTF-8">
     <title>Лабораторная работа по Web-программированию №1</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <script type="text/javascript">
-        function validate(form) {
-
-            var y = form.y.value;
+        function validate() {
+            var y = this.y.value;
             y = y.replace(/,/, ".");
-            if (y =="" || isNaN(y)) {document.getElementById("error").innerHTML = "Y должен быть числом"; return false}
+            if (y =="" || isNaN(y)) {document.getElementById("error").textContent = "Y должен быть числом"; return false}
             else if (y<-3 || y>5){
-                document.getElementById("error").innerHTML = "Y должен находиться от -3 до 5"; return false
+                document.getElementById("error").textContent = "Y должен находиться от -3 до 5"; return false
             }
             else {
                 document.getElementById("div-result").style.display = "block";
-                document.getElementById("error").innerHTML = "";
+                document.getElementById("error").textContent = "";
                 return true;}
         }
-        function check(input) {
-            input.value = input.value.replace(/[^\d-,.]/, '');
+        function check() {
+
         }
+        function checkY() {
+            var y = document.querySelector("input[type=text]").value.replace(/,/, ".");
+            var test = /[^\d-,.]/.test(y);
+            if (test && y!==''){
+                document.getElementById("error").textContent = "Введены недопустимые символы"; return false;
+            }
+
+            if (y =="" || isNaN(y)) {document.getElementById("error").textContent = "Y должен быть числом"; return false}
+            else if (y<-3 || y>5){
+                document.getElementById("error").textContent = "Y должен находиться от -3 до 5"; return false
+            }
+            else {
+                document.getElementById("error").textContent = "";
+                return true;}
+        }
+
     </script>
 </head>
-<body>
+<>
 
 <div class="header block">
     <span class="header"> Демичев Даниил Дмитриевич<br> Группа P3213 <br> Вариант: 213003</span>
@@ -33,7 +49,7 @@
     <img src="img/pic.PNG" id="info-pic">
 </div>
 <div class="block input">
-    <form action="work.php" method="get" target="result"  onsubmit="return validate(this)">
+    <form action="work.php" method="get" target="result">
     Выберите X:
         <input type="radio" checked="checked" name="x" value="-5">-5
     <input type="radio" name="x" value="-4">-4
@@ -46,7 +62,7 @@
     <input type="radio" name="x" value="3">3
     <br>
     Введите Y:
-    <input type="text"  placeholder="-3..5" name="y" onkeyup="check(this)" onchange="check(this)"> <span id="ajax"></span>
+    <input type="text"  placeholder="-3..5" name="y" >
     <br>
     Выберите R:
     <select name="r">
@@ -69,52 +85,15 @@
 <div class="footer block">
     2019 г.
 </div>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script>
-    request = new ajaxRequest();
-    request.open("GET", "ajax.php", true);
-    request.onreadystatechange = function()
-    {
-        if (this.readyState == 4)
-        {
-            if (this.status == 200)
-            {
-                if (this.responseText != null)
-                {
-                    document.getElementById('ajax').innerHTML =
-                        this.responseText
-                }
-                else alert("Ошибка AJAX: Данные не получены")
-            }
-            else alert( "Ошибка AJAX: " + this.statusText)
-        }
-    }
-    request.send()
-    function ajaxRequest()
-    {
-        try
-        {
-            var request = new XMLHttpRequest()
-        }
-        catch(e1)
-        {
-            try
-            {
-                request = new ActiveXObject("Msxml2.XMLHTTP")
-            }
-            catch(e2)
-            {
-                try
-                {
-                    request = new ActiveXObject("Microsoft.XMLHTTP")
-                }
-                catch(e3)
-                {
-                    request = false
-                }
-            }
-        }
-        return request
-    }
+    document.querySelector("form").onsubmit=validate;
+    let tmr;
+    document.querySelector("input[type=text]").onkeyup = function() {
+        clearTimeout(tmr);
+        tmr = setTimeout(checkY,1000);
+    };
+
 </script>
 </body>
 </html>
