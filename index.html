@@ -6,6 +6,25 @@
     <title>Лабораторная работа по Web-программированию №1</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <script type="text/javascript">
+        function ajaxRequest() {
+            try {
+                var request = new XMLHttpRequest()
+            }
+            catch (e1) {
+                try{
+                    request = new ActiveXObject("Msxml2.XMLHTTP")
+                }
+                catch (e2) {
+                    try {
+                        request = new ActiveXObject("Microsoft.XMLHTTP")
+                    }
+                    catch (e3) {
+                        request = false
+                    }
+                }
+            }
+            return request
+        }
         function validate() {
             var y = this.y.value;
             y = y.replace(/,/, ".");
@@ -19,7 +38,26 @@
                 return true;}
         }
         function check() {
-
+            request = new ajaxRequest();
+            ajaxY = document.querySelector("input[type=text]").value;
+            request.open("GET", "ajax.php?y=" + ajaxY, true);
+            request.onreadystatechange = function()
+            {
+                if (this.readyState == 4)
+                {
+                    if (this.status == 200)
+                    {
+                        if (this.responseText != null)
+                        {
+                            document.getElementById('error').textContent =
+                                this.responseText
+                        }
+                        else alert("Ошибка AJAX: Данные не получены ")
+                    }
+                else alert( "Ошибка AJAX: " + this.statusText)
+                }
+            }
+            request.send(null)
         }
         function checkY() {
             var y = document.querySelector("input[type=text]").value.replace(/,/, ".");
@@ -91,7 +129,7 @@
     let tmr;
     document.querySelector("input[type=text]").onkeyup = function() {
         clearTimeout(tmr);
-        tmr = setTimeout(checkY,1000);
+        tmr = setTimeout(check,1000);
     };
 
 </script>
